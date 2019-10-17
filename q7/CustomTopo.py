@@ -15,7 +15,7 @@ class CustomTopo(Topo):
         core = self.addSwitch('c1')
 
         # Keep track of which edge and host node we are on
-        edge_num = host_num = 1
+        track_edge = track_host = 1
 
         # Build aggregation layer
         for i in range(fanout):
@@ -24,14 +24,14 @@ class CustomTopo(Topo):
 
             # Build edge layer
             for j in range(fanout):
-                edge_switch = self.addSwitch('e%s' % edge_num)
-                edge_num += 1
+                edge_switch = self.addSwitch('e%s' % track_edge)
+                track_edge += 1
                 self.addLink(edge_switch, aggregation_switch,  **linkopts2)
 
                 # Build host layer
                 for j in range(fanout):
-                    host = self.addHost('h%s' % host_num)
-                    host_num += 1
+                    host = self.addHost('h%s' % track_host)
+                    track_host += 1
                     self.addLink(host, edge_switch, **linkopts3)
 
 
