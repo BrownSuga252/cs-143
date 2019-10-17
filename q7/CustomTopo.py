@@ -20,6 +20,9 @@ class CustomTopo(Topo):
             self.addLink(edge_switch, host1, linkopts2["bw"], linkopts2["delay"],linkopts2["loss"], linkopts2["max_queue_size"], linkopts2["use_htb"])
             self.addLink(edge_switch, host2, linkopts3["bw"], linkopts3["delay"],linkopts3["loss"], linkopts3["max_queue_size"], linkopts3["use_htb"])
             
-        
+
+linkopts1 = dict(bw=10, delay=’5ms’, loss=10, max_queue_size=1000, use_htb=True)
+linkopts2 = dict(bw=10, delay=’5ms’, loss=10, max_queue_size=1000, use_htb=True)
+linkopts3 = dict(bw=10, delay=’5ms’, loss=10, max_queue_size=1000, use_htb=True)
                     
-topos = { 'custom': ( lambda: CustomTopo() ) }
+topos = { 'custom': ( lambda: CustomTopo(linkopts1,linkopts2,linkopts3) ) }
