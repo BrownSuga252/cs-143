@@ -18,7 +18,7 @@ class CustomTopo(Topo):
 
         # Aggregation
         for agg_iterator in range(fanout):
-            agg_switch = self.addSwitch('a%s' % i)
+            agg_switch = self.addSwitch('a%s' % agg_iterator)
             self.addLink(agg_switch, core,  **linkopts1)
 
             # Edge
