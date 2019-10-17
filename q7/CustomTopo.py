@@ -23,7 +23,7 @@ class CustomTopo(Topo):
 
             # Edge
             for edge_iterator in range(fanout):
-                edge_switch = self.addSwitch('e%s' % track_edge)
+                edge_switch = self.addSwitch('e%s' % (agg_iterator+edge_iterator+1))
                 track_edge += 1
                 self.addLink(edge_switch, agg_switch,  **linkopts2)
 
