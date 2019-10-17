@@ -19,18 +19,18 @@ class CustomTopo(Topo):
         host_num = 1
 
         # Build aggregation layer
-        for i in range(1, fanout + 1):
+        for i in range(fanout):
             aggregation_switch = self.addSwitch('a%s' % i)
             self.addLink(aggregation_switch, core,  **linkopts1)
 
             # Build edge layer
-            for j in range(1, fanout + 1):
+            for j in range(fanout):
                 edge_switch = self.addSwitch('e%s' % edge_num)
                 edge_num += 1
                 self.addLink(edge_switch, aggregation_switch,  **linkopts2)
 
                 # Build host layer
-                for j in range(1, fanout + 1):
+                for j in range(fanout):
                     host = self.addHost('h%s' % host_num)
                     host_num += 1
                     self.addLink(host, edge_switch, **linkopts3)
