@@ -20,12 +20,12 @@ class CustomTopo(Topo):
 
         # Build aggregation layer
         for i in range(fanout):
-            aggregation_switch = self.addSwitch('a%s' % i)
+            aggregation_switch = self.addSwitch('s%s' % i)
             self.addLink(aggregation_switch, core,  **linkopts1)
 
             # Build edge layer
             for j in range(fanout):
-                edge_switch = self.addSwitch('e%s' % edge_num)
+                edge_switch = self.addSwitch('s%s' % edge_num)
                 edge_num += 1
                 self.addLink(edge_switch, aggregation_switch,  **linkopts2)
 
