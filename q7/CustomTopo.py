@@ -13,23 +13,20 @@ class CustomTopo(Topo):
 
         # Get Core Made
         core = self.addSwitch('c1')
-
         track_edge = track_host = 1
 
-        # Aggregation
+        # Creating Aggregation Layer
         for agg_iterator in range(fanout):
-            agg_switch = self.addSwitch('a%s' % agg_iterator)
+            agg_switch = self.addSwitch('agg%s' % agg_iterator)
             self.addLink(agg_switch, core,  **linkopts1)
-
-            # Edge
+            # Creating Edge Layer
             for edge_iterator in range(fanout):
-                edge_switch = self.addSwitch('e%s' % (agg_iterator+edge_iterator+1))
+                edge_switch = self.addSwitch('edge%s' % track_edge)
                 track_edge += 1
                 self.addLink(edge_switch, agg_switch,  **linkopts2)
-
-                # Host
+                # Creating Host Layer
                 for host_iterator in range(fanout):
-                    host = self.addHost('h%s' % track_host)
+                    host = self.addHost('host%s' % track_host)
                     track_host += 1
                     self.addLink(host, edge_switch, **linkopts3)
 
