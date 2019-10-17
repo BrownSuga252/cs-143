@@ -1,5 +1,6 @@
 from mininet.topo import Topo
 
+
 class CustomTopo(Topo):
     "Simple Data Center Topology"
 
@@ -11,24 +12,23 @@ class CustomTopo(Topo):
         # Add your logic here ...
         # Make Core 
         core = self.addSwitch('c1')
-        edge_num = 1
-        host_num = 1
+        track_edge = track_host = 1
 
         # Build aggregation layer
-        for i in range(1, fanout + 1):
-            aggregation_switch = self.addSwitch('a%s' % i)
+        for iterator in range(fanout):
+            aggregation_switch = self.addSwitch('s%s' % iterator)
             self.addLink(aggregation_switch, core,  **linkopts1)
 
             # Build edge layer
-            for j in range (1, fanout + 1):
-                edge_switch = self.addSwitch('e%s' % edge_num)
-                edge_num += 1
+            for iterator2 in range (fanout):
+                edge_switch = self.addSwitch('s%s' % track_edge)
+                track_edge += 1
                 self.addLink(edge_switch, aggregation_switch,  **linkopts2)
 
                 # Build host layer
-                for j in range (1, fanout + 1):
-                    host = self.addHost('h%s' % host_num)
-                    host_num += 1
+                for iterator2 in range (fanout):
+                    host = self.addHost('h%s' % track_host)
+                    track_host += 1
                     self.addLink(host, edge_switch, **linkopts3)
 
 linkopts1 = dict(bw=10, delay='5ms', max_queue_size=1000, use_htb=True)
