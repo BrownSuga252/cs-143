@@ -11,25 +11,24 @@ class CustomTopo(Topo):
         # Initialize topology and default options
         Topo.__init__(self, **opts)
 
-        # Build core layer
+        # Get Core Made
         core = self.addSwitch('c1')
 
-        # Keep track of which edge and host node we are on
         track_edge = track_host = 1
 
-        # Build aggregation layer
-        for i in range(fanout):
-            aggregation_switch = self.addSwitch('a%s' % i)
-            self.addLink(aggregation_switch, core,  **linkopts1)
+        # Aggregation
+        for agg_iterator in range(fanout):
+            agg_switch = self.addSwitch('a%s' % i)
+            self.addLink(agg_switch, core,  **linkopts1)
 
-            # Build edge layer
-            for j in range(fanout):
+            # Edge
+            for edge_iterator in range(fanout):
                 edge_switch = self.addSwitch('e%s' % track_edge)
                 track_edge += 1
-                self.addLink(edge_switch, aggregation_switch,  **linkopts2)
+                self.addLink(edge_switch, agg_switch,  **linkopts2)
 
-                # Build host layer
-                for j in range(fanout):
+                # Host
+                for host_iterator in range(fanout):
                     host = self.addHost('h%s' % track_host)
                     track_host += 1
                     self.addLink(host, edge_switch, **linkopts3)
