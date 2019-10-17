@@ -15,18 +15,18 @@ class CustomTopo(Topo):
         track_edge = track_host = 1
 
         # Build aggregation layer
-        for iterator in range(fanout):
-            aggregation_switch = self.addSwitch('s%s' % iterator)
+        for i in range(fanout):
+            aggregation_switch = self.addSwitch('a%s' % i)
             self.addLink(aggregation_switch, core,  **linkopts1)
 
             # Build edge layer
-            for iterator2 in range (fanout):
-                edge_switch = self.addSwitch('s%s' % track_edge)
+            for j in range (fanout):
+                edge_switch = self.addSwitch('e%s' % track_edge)
                 track_edge += 1
                 self.addLink(edge_switch, aggregation_switch,  **linkopts2)
 
                 # Build host layer
-                for iterator2 in range (fanout):
+                for j in range (fanout):
                     host = self.addHost('h%s' % track_host)
                     track_host += 1
                     self.addLink(host, edge_switch, **linkopts3)
