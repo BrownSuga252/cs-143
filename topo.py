@@ -8,7 +8,7 @@ class Q9Topo(Topo):
 
         # Add your logic here ...
         lastSwitch = None
-        switches = {(12, 11): 10,
+        switch_list = {(12, 11): 10,
                     (12, 14): 50,
                     (14, 16): 10,
                     (16, 18): 30,
@@ -20,13 +20,13 @@ class Q9Topo(Topo):
                  15: 14,
                  19: 18,
                  17: 16, }
-        for edge in switches:
-            s1 = self.addSwitch('s%s' % edge[0])
-            s2 = self.addSwitch('s%s' % edge[1])
-            self.addLink(s1, s2, switches[edge])
-        for edge in hosts:
-            host = self.addSwitch('h%s' % edge)
-            switch = self.addSwitch('s%s' % hosts[edge])
+        for pair in switch_list:
+            first = self.addSwitch('s%s' % pair[0])
+            second = self.addSwitch('s%s' % pair[1])
+            self.addLink(first, second, delay='%sms' % switch_list[pair])
+        for entry in hosts:
+            host = self.addSwitch('h%s' % entry)
+            switch = self.addSwitch('s%s' % hosts[entry])
             self.addLink(host, switch)
 
 
