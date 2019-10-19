@@ -4,7 +4,7 @@ from mininet.topo import Topo
 class Q9Topo(Topo):
     def __init__(self):
         # Initialize topology and default options
-        Topo.__init__(self, **opts)
+        Topo.__init__(self)
 
         # Add your logic here ...
         lastSwitch = None
