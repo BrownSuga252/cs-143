@@ -23,7 +23,7 @@ class Q9Topo(Topo):
         for edge in switches:
             s1 = self.addSwitch('s%s' % edge[0])
             s2 = self.addSwitch('s%s' % edge[1])
-            self.addLink(s1, s2, delay='%sms' % switches[edge])
+            self.addLink(s1, s2, switches[edge])
         for edge in hosts:
             host = self.addSwitch('h%s' % edge)
             switch = self.addSwitch('s%s' % hosts[edge])
