@@ -27,5 +27,5 @@ class Q9Topo(Topo):
             host = self.addSwitch('h$s' % edge)
             switch = self.addSwitch('s%s' % hosts[edge])
             self.addLink(host,switch)
-                    
+Q9Topo()            
 topos = { 'custom': ( lambda: Q9Topo() ) }
