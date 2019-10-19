@@ -23,7 +23,7 @@ class Q9Topo(Topo):
         for pair in switch_list:
             first = self.addSwitch('s%s' % pair[0])
             second = self.addSwitch('s%s' % pair[1])
-            self.addLink(first, second, delay='%sms' % switch_list[pair])
+            self.addLink(first, second, switch_list[pair])
         for entry in hosts:
             host = self.addSwitch('h%s' % entry)
             switch = self.addSwitch('s%s' % hosts[entry])
